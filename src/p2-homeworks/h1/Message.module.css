@@ -1,0 +1,17 @@
+
+.message {
+    background: greenyellow;
+    position: relative;
+    width: 250px;
+    height: 90px;
+    margin-left: 50px;
+    border-radius: 10px;
+}
+.message::after {
+    content: '';
+    position: absolute;
+    left: -25px; top: 77px;
+    border: 10px solid transparent;
+    border-left: 20px solid greenyellow;
+    -webkit-transform: rotate(155deg);
+}
