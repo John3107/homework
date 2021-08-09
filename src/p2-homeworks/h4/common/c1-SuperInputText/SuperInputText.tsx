@@ -19,7 +19,6 @@ const SuperInputText: React.FC<SuperInputTextPropsType> = (
         onKeyPress, onEnter,
         error, value,
         className, spanClassName,
-
         ...restProps
     }
 ) => {

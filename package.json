@@ -20,7 +20,7 @@
     "uuid": "^8.3.2",
     "web-vitals": "^1.0.1"
   },
-  "homepage": "https://John3107.github.io/homeworks",
+  "homepage": "https://John3107.github.io/homework",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
