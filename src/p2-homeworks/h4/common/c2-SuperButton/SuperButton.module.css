@@ -1,7 +1,7 @@
 .button {
     display: inline-block;
     color: black;
-    font-size: 125%;
+    font-size: 100%;
     font-weight: 700;
     text-decoration: none;
     user-select: none;
@@ -24,7 +24,7 @@
 
 .red {
     color: black;
-    font-size: 125%;
+    font-size: 100%;
     font-weight: 700;
     text-decoration: none;
     user-select: none;
@@ -46,7 +46,7 @@
 }
 
 .button:disabled {
-    font-size: 125%;
+    font-size: 100%;
     font-weight: 700;
     text-decoration: none;
     user-select: none;
