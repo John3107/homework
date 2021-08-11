@@ -6,6 +6,10 @@ function App() {
     return (
         <div className={s.App}>
             <div>React Homeworks:</div>
+            <hr/>
+            <hr/>
+            <div>Homework №5</div>
+            <hr/>
             <HW5/>
         </div>
     )
