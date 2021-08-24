@@ -1,37 +1,46 @@
-import React, {useState} from 'react'
+import React, {MouseEvent, useState} from 'react'
 import SuperButton from '../h4/common/c2-SuperButton/SuperButton'
+import s from './Clock.module.css'
 
 function Clock() {
     const [timerId, setTimerId] = useState<number>(0)
-    const [date, setDate] = useState<Date>()
+    const [date, setDate] = useState<string>()
+    const [time, setTime] = useState<string>()
     const [show, setShow] = useState<boolean>(false)
 
     const stop = () => {
-        // stop
+        window.clearTimeout(timerId)
     }
+
     const start = () => {
         stop()
         const id: number = window.setInterval(() => {
-            // setDate
+            let newTime = new Date().toLocaleTimeString('en-GB');
+            setTime(newTime)
         }, 1000)
         setTimerId(id)
     }
 
-    const onMouseEnter = () => {
-        // show
+    const onMouseEnter = (e: MouseEvent<HTMLDivElement>) => {
+        let newDate = new Date().toLocaleDateString('uk-UA')
+        setDate(newDate)
+        setShow(true)
     }
     const onMouseLeave = () => {
-        // close
+        setShow(false)
     }
 
-    const stringTime = 'Time' // fix with date
-    const stringDate = 'Date' // fix with date
+    const stringTime = time
+    const stringDate = date
+
+    const dateShowerForTime = show === true ? '' : s.time
+    const dateShowerForButtons = show === true ? s.buttons : s.buttonsOnHover
 
     return (
-        <div>
-            <div
-                onMouseEnter={onMouseEnter}
-                onMouseLeave={onMouseLeave}
+        <div className={s.clock}>
+            <div className={dateShowerForTime}
+                 onMouseEnter={onMouseEnter}
+                 onMouseLeave={onMouseLeave}
             >
                 {stringTime}
             </div>
@@ -41,10 +50,10 @@ function Clock() {
                     {stringDate}
                 </div>
             )}
-
-            <SuperButton onClick={start}>start</SuperButton>
-            <SuperButton onClick={stop}>stop</SuperButton>
-
+            <div className={dateShowerForButtons}>
+                <SuperButton className={s.start} onClick={start}>start</SuperButton>
+                <SuperButton onClick={stop}>stop</SuperButton>
+            </div>
         </div>
     )
 }
