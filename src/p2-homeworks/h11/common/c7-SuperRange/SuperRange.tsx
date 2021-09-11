@@ -1,43 +1,47 @@
-import React, {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes} from 'react'
-import s from './SuperRange.module.css'
+import React from 'react'
+import {makeStyles} from '@material-ui/core/styles';
+import Slider from '@material-ui/core/Slider';
 
-// тип пропсов обычного инпута
-type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
-// здесь мы говорим что у нашего инпута будут такие же пропсы как у обычного инпута
-// (чтоб не писать value: string, onChange: ...; они уже все описаны в DefaultInputPropsType)
-type SuperRangePropsType = DefaultInputPropsType & { // и + ещё пропсы которых нет в стандартном инпуте
-    onChangeRange?: (value: number) => void
+type SuperRangePropsType = {
+    value: number[]
+    setValue: (value: number[]) => void
+    disRange: boolean
 };
 
-const SuperRange: React.FC<SuperRangePropsType> = (
-    {
-        type, // достаём и игнорируем чтоб нельзя было задать другой тип инпута
-        onChange, onChangeRange,
-        className,
+export const SuperRange = (props: SuperRangePropsType) => {
 
-        ...restProps// все остальные пропсы попадут в объект restProps
+
+    const useStyles = makeStyles({
+        root: {
+            width: 300,
+        },
+    });
+
+
+    const handleChange = (event: React.ChangeEvent<{}>, newValue: number | number[]) => {
+        let currentValue = [...props.value]
+        if (typeof newValue === "number" && newValue < props.value[1]) {
+            props.setValue([currentValue[0] = newValue, currentValue[1]] as number[])
+        }
+        if (typeof newValue === "number" && props.disRange) {
+            props.setValue([currentValue[0] = newValue, currentValue[1] = newValue] as number[])
+
+        }
     }
-) => {
-    const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
-        onChange && onChange(e) // сохраняем старую функциональность
-
-        onChangeRange && onChangeRange(+e.currentTarget.value)
-    }
-
-    const finalRangeClassName = `${s.range} ${className ? className : ''}`
+    const classes = useStyles();
 
     return (
-        <>
-            <input
-                type={'range'}
-                onChange={onChangeCallback}
-                className={finalRangeClassName}
-
-                {...restProps} // отдаём инпуту остальные пропсы если они есть (value например там внутри)
+        <div className={classes.root}>
+            <Slider
+                style={{marginTop: '25px'}}
+                defaultValue={props.value[0]}
+                onChange={handleChange}
+                value={props.value[0]}
+                aria-labelledby="slider"
+                valueLabelDisplay="auto"
             />
-        </>
-    )
+        </div>
+    );
 }
 
-export default SuperRange
