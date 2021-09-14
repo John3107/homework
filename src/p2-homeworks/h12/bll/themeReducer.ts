@@ -1,14 +1,21 @@
-const initState = {
+type initStateType = typeof initState
 
-};
+type TextType = ReturnType<typeof themeAC>
 
-export const themeReducer = (state = initState, action: any): any => { // fix any
+const initState = ['darkgreen', 'dark', 'red', 'some', 'blue', 'white']
+
+export const themeReducer = (state = initState, action: TextType): initStateType => {
     switch (action.type) {
-        case "": {
-            return state;
+        case 'THEME': {
+            let stateCopy = [...state]
+            let copy = stateCopy.filter(f => f !== action.theme)
+            let newCopy = [action.theme, ...copy]
+            return newCopy;
         }
-        default: return state;
+
+        default:
+            return state;
     }
 };
 
-export const changeThemeC = (): any => {}; // fix any
+export const themeAC = (theme: string) => ({type: 'THEME', theme} as const)

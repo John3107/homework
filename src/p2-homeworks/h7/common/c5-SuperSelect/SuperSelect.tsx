@@ -1,5 +1,7 @@
 import React, {SelectHTMLAttributes, DetailedHTMLProps, ChangeEvent} from 'react'
 import {v1} from "uuid";
+import {useDispatch} from "react-redux";
+import {themeAC} from "../../../h12/bll/themeReducer";
 
 type DefaultSelectPropsType = DetailedHTMLProps<SelectHTMLAttributes<HTMLSelectElement>, HTMLSelectElement>
 
@@ -15,6 +17,9 @@ const SuperSelect: React.FC<SuperSelectPropsType> = (
         ...restProps
     }
 ) => {
+
+    const dispatch = useDispatch()
+
     const mappedOptions: any[] = options.map((o) => {
         return <option key={o}>{o}</option>
     })
@@ -22,6 +27,7 @@ const SuperSelect: React.FC<SuperSelectPropsType> = (
     const onChangeCallback = (e: ChangeEvent<HTMLSelectElement>) => {
         onChange && onChange(e)
         onChangeOption && onChangeOption(e.currentTarget.value)
+        dispatch(themeAC((e.currentTarget.value)))
     }
 
     return (

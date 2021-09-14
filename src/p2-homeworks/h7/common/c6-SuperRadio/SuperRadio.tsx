@@ -1,4 +1,6 @@
 import React, {ChangeEvent, InputHTMLAttributes, DetailedHTMLProps} from 'react'
+import {useDispatch} from "react-redux";
+import {textAC} from "../../../h12/bll/textReducer";
 
 type DefaultRadioPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
@@ -15,9 +17,12 @@ const SuperRadio: React.FC<SuperRadioPropsType> = (
         ...restProps
     }
 ) => {
+    const dispatch = useDispatch()
+
     const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
         onChange && onChange(e)
         onChangeOption && onChangeOption(e.currentTarget.value)
+        dispatch(textAC((e.currentTarget.value)))
     }
 
 
