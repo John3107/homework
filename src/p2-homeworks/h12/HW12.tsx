@@ -4,28 +4,30 @@ import {useSelector} from "react-redux";
 import {AppStoreType} from "../h10/bll/store";
 import SuperSelect from "../h7/common/c5-SuperSelect/SuperSelect";
 import SuperRadio from "../h7/common/c6-SuperRadio/SuperRadio";
-import {initState} from "./bll/textReducer";
 
 
 function HW12() {
 
     const themes = useSelector<AppStoreType, string[]>(state => state.theme)
-    const texts = useSelector<AppStoreType, string[]>(state => state.text)
+    const texts = useSelector<AppStoreType, string[]>(state => state.text.text)
+    const value = useSelector<AppStoreType, string>(state => state.text.value)
 
     return (
         <div className={s[themes[0]]}>
             <hr/>
-            <span className={s[themes + '-text']}>
+            <span className={s[value]}>
                 Homework №12
+                <hr/>
             </span>
-            <div>
-                <SuperSelect options={themes}
-                             value={themes[0]}
-                />
+            <div className={s.selectAndRadio}>
                 <SuperRadio
                     name={'radio'}
-                    options={initState}
-                    value={texts}
+                    options={texts}
+                    value={value}
+                />
+                <SuperSelect options={themes}
+                             value={themes[0]}
+                             className={s.select}
                 />
             </div>
             <hr/>

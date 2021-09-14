@@ -3,7 +3,7 @@
 }
 
 .dark-text {
-    color: aliceblue;
+    color: darkmagenta;
 }
 
 .red {
@@ -11,7 +11,7 @@
 }
 
 .red-text {
-    color: aqua;
+    color: red;
 }
 
 .some {
@@ -19,7 +19,7 @@
 }
 
 .some-text {
-    color: darkslateblue;
+    color: lawngreen;
 }
 
 .blue {
@@ -35,5 +35,17 @@
 }
 
 .dodgerblue-text {
-    color: dodgerblue;
+    color: #071f50;
+}
+
+.selectAndRadio {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin-left: 10px;
+    width: 200px;
+}
+
+.select {
+    margin-top: 10px;
 }

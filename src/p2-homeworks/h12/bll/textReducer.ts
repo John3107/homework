@@ -1,18 +1,22 @@
-type initStateType = typeof initState
+type initStateType = {
+    value: string
+    text: string[]
+}
 
 type ThemeType = ReturnType<typeof textAC>
 
-export const initState = ['dark-text', 'red-text', 'some-text', 'cornflowerblue-text', 'dodgerblue-text']
-
-export const textReducer = (state = initState, action: ThemeType): initStateType => {
+export const initState = {
+    text: ['dark-text', 'red-text', 'some-text', 'cornflowerblue-text', 'dodgerblue-text'],
+    value: 'dark-text'
+}
+export const textReducer = (state: initStateType = initState, action: ThemeType): initStateType => {
     debugger
     switch (action.type) {
 
-        case 'TEXT': {
-            let stateCopy = [...state]
-            let copy = stateCopy.filter(f => f === action.text)
-            return copy;
-        }
+        case 'TEXT':
+            return {
+                ...state, value: action.text
+            }
         default:
             return state;
     }
