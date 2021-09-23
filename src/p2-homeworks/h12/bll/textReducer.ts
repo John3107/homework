@@ -10,7 +10,6 @@ export const initState = {
     value: 'dark-text'
 }
 export const textReducer = (state: initStateType = initState, action: ThemeType): initStateType => {
-    debugger
     switch (action.type) {
 
         case 'TEXT':

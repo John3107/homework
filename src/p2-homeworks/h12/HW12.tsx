@@ -15,6 +15,7 @@ function HW12() {
     return (
         <div className={s[themes[0]]}>
             <hr/>
+            <hr/>
             <span className={s[value]}>
                 Homework №12
                 <hr/>
